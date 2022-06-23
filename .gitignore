@@ -1,5 +1,5 @@
 venv
-pycache
+__pycache__/
 rolodata.dat
 data/*
 start.log

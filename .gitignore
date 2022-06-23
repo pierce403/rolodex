@@ -1,0 +1,5 @@
+venv
+pycache
+rolodata.dat
+data/*
+start.log

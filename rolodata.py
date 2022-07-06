@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from sqlalchemy import Table, Column, Float, Integer, String, DateTime, MetaData, ForeignKey, func
 import os
 import random
@@ -17,14 +18,20 @@ class People(db.Model):
   first_name:str = db.Column(db.String(80))
   last_name: str = db.Column(db.String(80))
 
-  personal_email = db.Column(db.String(80))
-  work_email = db.Column(db.String(80))
+  personal_email:str = db.Column(db.String(80))
+  work_email:str  = db.Column(db.String(80))
 
-  work_ntlm = db.Column(db.String(80))
-  work_ntlmv2 = db.Column(db.String(80))
-  work_password = db.Column(db.String(80))
+  work_ntlm:str = db.Column(db.String(80))
+  work_ntlmv2:str = db.Column(db.String(80))
+  work_roast:str = db.Column(db.String(80))
+  work_password:str = db.Column(db.String(80))
 
-  linkedin_url = db.Column(db.String(80))
+  domain_admin:bool = db.Column(db.Boolean)
+  been_pwned:bool = db.Column(db.Boolean)
+
+  linkedin_url:str = db.Column(db.String(80))
+  twitter_url:str = db.Column(db.String(80))
+  facebook_url:str = db.Column(db.String(80))
 
   ctime = db.Column(DateTime, default=func.now())
 
@@ -37,6 +44,7 @@ def setup(app):
     print("[-] DBURI invalid "+str(e))
 
   db = SQLAlchemy(app)
+  migrate = Migrate(app,db)
 
 def init():
   db.create_all()
@@ -50,6 +58,18 @@ def search(query):
 
   return people
 
+def update_person(index, new_data):
+  target_person = People.query.first() # TODO actually do the search
+
+  for field in new_data.keys():
+    print(field)
+    #new_person.__table__.c[field] = new_data[field]
+    setattr(target_person, field, new_data[field])
+
+  db.session.commit()
+  return True
+
+
 def new_person(new_data):
   new_person = People()
 
@@ -58,8 +78,6 @@ def new_person(new_data):
     #new_person.__table__.c[field] = new_data[field]
     setattr(new_person, field, new_data[field])
 
-  #new_person.first_name = new_data['first_name']
-  #new_person.last_name  = new_data['last_name']
-
   db.session.add(new_person)
   db.session.commit()
+  return True

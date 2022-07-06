@@ -2,4 +2,4 @@ flask
 flask-sqlalchemy
 web3
 werkzeug
-
+flask-migrate

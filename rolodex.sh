@@ -17,8 +17,8 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 
 # add in any new fields
-flask db migrate
-flask db upgrade
+#flask db migrate
+#flask db upgrade
 
 while [ 1 == 1 ]
 do

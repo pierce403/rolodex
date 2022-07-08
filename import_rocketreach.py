@@ -23,12 +23,12 @@ fields = ["name", "email", "enabled", "title", "displayname", "description"]
 if data:
   for person in data['profiles']:
     new_person = {}
-    new_person['name'] = person['name']
-    #new_person['linkedin_url'] = person['linkedin_url']
-    #new_person['name'] = person['name']
-    #rolodata.new_person(new_person)
-    print(new_person['name'])
+    new_person['full_name'] = person['name']
+    new_person['linkedin_url'] = person['linkedin_url']
+    new_person['current_title'] = person['current_title']
+    print('[+] importing '+new_person['full_name'])
+    rolodata.new_person(new_person)
 
-#rolodata.commit()
+rolodata.commit()
 
 

@@ -16,8 +16,11 @@ class People(db.Model):
 
   # stuff to include in asdict() must be annoted like :str
   rocket_id: str = db.Column(db.String(80))
+  full_name: str = db.Column(db.String(80))
   first_name:str = db.Column(db.String(80))
   last_name: str = db.Column(db.String(80))
+
+  current_title: str = db.Column(db.String(80))
 
   personal_email:str = db.Column(db.String(80))
   work_email:str  = db.Column(db.String(80))
@@ -93,7 +96,8 @@ def new_person(new_data):
   return True
 
 def commit():
-  print("[+] COMMITTED "+str(db.session.commit()))
+  db.session.commit()
+  print("[+] COMMITTED")
 
 def bulk_update(update_data):
   stmt = People.__table__.update().where(People.__table__.c.id == bindparam('ad_name')).values({

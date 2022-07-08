@@ -3,7 +3,7 @@ import time
 import os, sys
 
 endpoint = 'https://api.rocketreach.co/v2/api/search'
-apikey = os.getenv('ROCKETKEY')
+key = os.getenv('ROCKETKEY')
 
 # for example 'http://www.facebook.com/careers'
 website = sys.argv[1]
@@ -16,7 +16,7 @@ while True:
   data = f'{{"query":{{"company_website_url": ["{website}"]}}, "start": {next_page}, "page_size": 100}}'
   print('posting request..')
   response = requests.post(endpoint, data=data, headers=headers)
-  f = open(website+'-'+str(next_page)+".json", "w")
+  f = open(website.split('/')[2]+'-'+str(next_page)+".json", "w")
   f.write(response.text)
   f.close()
 

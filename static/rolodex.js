@@ -1,7 +1,7 @@
-document.getElementById('rolodex-search-form').addEventListener('submit', function(e) {
-    rolodexSearch();
-    e.preventDefault();
-}, false);
+//document.getElementById('rolodex-search-form').addEventListener('submit', function(e) {
+//    rolodexSearch();
+//    e.preventDefault();
+//}, false);
 
 function rolodexSearch()
 {      
@@ -48,5 +48,5 @@ function rolodexSearch()
 
 }
 
-document.getElementById("rolodex-search").value="nmap";
+//document.getElementById("rolodex-search").value="nmap";
 //rolodexSearch();
